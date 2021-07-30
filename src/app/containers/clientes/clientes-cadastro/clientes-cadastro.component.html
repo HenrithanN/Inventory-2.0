@@ -14,7 +14,7 @@
       <input type="text" id="inputURL" placeholder="Cole a URL aqui" class="form-control mt-3" formControlName="enderecoImagem" (blur)="urlImagem = formCliente.get('enderecoImagem').value">
     </div>
     <ng-template #previaFoto>
-      <img src="{{ urlImagem }}" alt="Previa Imagem Cliente" class="img-thumbnail">
+      <img src="{{ urlImagem }}" alt="Previa Imagem Cliente" class="card-img-top">
       <p class="text-success"> Foto do Cliente carregada com Sucesso!</p>
       <button class="btn btn-danger" (click)="urlImagem = ''">Remover Foto</button>
     </ng-template>
@@ -26,17 +26,21 @@
       <div class="col-md-8">
         <label for="nomeCompleto" class="form-label">Nome Completo:</label>
         <input type="text" class="form-control" formControlName="nome" id="nomeCompleto">
+        <span class="text-danger" *ngIf="formCliente.get('nome').touched && formCliente.get('nome')?.errors?.required">O Campo Nome Completo é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="dataNascimento" class="form-label">Data Nascimento:</label>
         <input type="date" class="form-control" formControlName="dataNasc" id="dataNascimento">
+        <span class="text-danger" *ngIf="formCliente.get('dataNasc').touched && formCliente.get('dataNasc')?.errors?.required">O Campo Data Nascimento é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="telefoneCelular" class="form-label mt-3">Telefone Celular:</label>
         <input type="text" class="form-control" formControlName="telefoneCelular" id="telefoneCelular">
+        <span class="text-danger" *ngIf="formCliente.get('telefoneCelular').touched && formCliente.get('telefoneCelular')?.errors?.required">O Campo Telefone Celular é Obrigatório!</span>
 
         <label for="rg" class="form-label mt-3">RG:</label>
         <input type="text" class="form-control" formControlName="rg" id="rg">
+        <span class="text-danger" *ngIf="formCliente.get('rg').touched && formCliente.get('rg')?.errors?.required">O Campo RG é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="telefoneFixo" class="form-label mt-3">Telefone Fixo:</label>
@@ -44,18 +48,22 @@
 
         <label for="cpf" class="form-label mt-3">CPF:</label>
         <input type="text" class="form-control" formControlName="cpf" id="cpf">
+        <span class="text-danger" *ngIf="formCliente.get('cpf').touched && formCliente.get('cpf')?.errors?.required">O Campo CPF é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="email" class="form-label mt-3">Email</label>
         <input type="email" class="form-control" formControlName="email" id="email">
+        <span class="text-danger" *ngIf="formCliente.get('email').touched && formCliente.get('email')?.errors?.required">O Campo Email é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="endereco" class="form-label mt-3">Endereço:</label>
         <input type="text" class="form-control" formControlName="endereco" id="endereco">
+        <span class="text-danger" *ngIf="formCliente.get('endereco').touched && formCliente.get('endereco')?.errors?.required">O Campo Endereco é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="cep" class="form-label mt-3">CEP:</label>
         <input type="text" class="form-control" formControlName="cep" id="cep">
+        <span class="text-danger" *ngIf="formCliente.get('cep').touched && formCliente.get('cep')?.errors?.required">O Campo CEP é Obrigatório!</span>
       </div>
       <div class="col-md-4">
         <label for="uf" class="form-label mt-3">UF:</label>
@@ -63,6 +71,7 @@
           <option selected>Selecione um estado</option>
           <option *ngFor="let uf of ufs">{{ uf }}</option>
         </select>
+        <span class="text-danger" *ngIf="formCliente.get('uf').touched && formCliente.get('uf')?.errors?.required">O Campo UF é Obrigatório!</span>
       </div>
       <div class="col-md-6 mt-5">
         <div class="d-grid gap-2">

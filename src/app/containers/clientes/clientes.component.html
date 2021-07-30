@@ -13,12 +13,12 @@
 
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="card m-3 p-2 col-md-auto" style="max-width: 18rem;"  *ngFor="let cliente of clientes | search:buscaClientes">
+    <div class="card m-3 p- col-md-auto" style="max-width: 18rem; max-height: 400px;"  *ngFor="let cliente of clientes | search:buscaClientes">
       <img src="{{ cliente.enderecoImagem }}" class="card-img-top" alt="Foto do cliente">
       <div class="card-body">
         <h5 class="card-title">Nome: {{ cliente.nome }}</h5>
         <hr>
-        <p class="card-text"> Email: {{ cliente.email }}</p>
+        <p class="card-text">{{ cliente.email }}</p>
         <hr>
         <a [routerLink]="['/clientes',cliente.id]" class="btn btn-primary">Detalhes</a>
         <a class="btn btn-danger ms-3" (click)="excluirCliente(cliente)">Excluir Cliente</a>

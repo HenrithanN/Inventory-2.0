@@ -26,6 +26,9 @@ export class ClientesComponent implements OnInit {
   excluirCliente(cliente: any){
     this.clientesService.deletar(cliente.id).subscribe(()=>{
       alert(`Cliente ${cliente.nome} Removido Com Sucesso!`)
+
+      this.clientes = [];
+      this.listarTodos()
     });
   }
 }

@@ -1,7 +1,7 @@
 import { environment } from './../../../../environments/environment';
 import { ClientesService } from './../../../services/clientes.service';
 import { Clientes } from 'src/app/interfaces/clientes';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-clientes-cadastro',
   templateUrl: './clientes-cadastro.component.html'
 })
-export class ClientesCadastroComponent implements OnInit, OnChanges {
+export class ClientesCadastroComponent implements OnInit {
 
   cliente: Clientes[] = [];
   ufs: any = ['AC','AL','AP','AM','BA','CE','DF','ES','GO',
@@ -38,14 +38,6 @@ export class ClientesCadastroComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    changes.urlImagem;
-    console.log(changes)
-    console.log(changes.urlImagem)
-  }
-
   ulpoadImagem(arquivo: File){
     this.arquivoImagem = arquivo;
     const leitorArquivo = new FileReader();
@@ -62,9 +54,11 @@ export class ClientesCadastroComponent implements OnInit, OnChanges {
       return dados;
     }
   }
+
   cadastrarCliente(){
 
     const fotoCliente = this.setPhotoValue(this.formCliente.get('enderecoImagem').value);
+
     const dados = {
       rg: this.formCliente.get('rg').value,
       cpf: this.formCliente.get('cpf').value,
@@ -80,10 +74,12 @@ export class ClientesCadastroComponent implements OnInit, OnChanges {
     if(this.formCliente.valid){
       this.clientesService.cadastrar(dados).subscribe(()=>{
         alert('Cliente Cadastrado com Sucesso!');
+        this.router.navigate(['/clientes'])
       });
 
     }else{
-      alert('Existem Dados Invalidos')
+      this.formCliente.markAllAsTouched();
+      alert('Existem Dados Invalidos');
     }
   }
 }

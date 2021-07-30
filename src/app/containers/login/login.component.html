@@ -1,4 +1,19 @@
-<p>
-  login works!
-</p>
-<button class="btn btn-primary" [routerLink]="['/clientes']" routerLinkActive="router-link-active" >Login</button>
+<div class="row justify-content-center mt-5">
+
+  <div class="col-md-4">
+    <img src="https://th.bing.com/th/id/R.c2f654f3bf44839cd7078c2e3b7df100?rik=apQo7s2gykCUrA&riu=http%3a%2f%2fst.depositphotos.com%2f1775533%2f3513%2fi%2f950%2fdepositphotos_35133385-stock-photo-3d-people-standing-in-the.jpg&ehk=97X%2bFR5yxTnIymPfa%2bDzYybHxXUTM%2foeAbewRG9aZR0%3d&risl=&pid=ImgRaw" alt="" class="card-img-top">
+  </div>
+
+  <form [formGroup]="formLogin" class="col-md-7 ms-5 mt-5">
+    <div class="col-md-8">
+      <label for="nomeCompleto" class="form-label">Usuario:</label>
+      <input type="text" class="form-control" formControlName="nome" id="nomeCompleto">
+    </div>
+    <div class="col-md-8">
+      <label for="senha" class="form-label">Senha:</label>
+      <input type="password" class="form-control" formControlName="senha" id="senha">
+    </div>
+    <button class="col-md-8 mt-3 btn btn-primary" [routerLink]="['/clientes']" routerLinkActive="router-link-active" >Login</button>
+  </form>
+
+</div>

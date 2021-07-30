@@ -2,6 +2,7 @@ import { ClientesService } from './../../../services/clientes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-clientes-detalhes',
@@ -14,6 +15,8 @@ export class ClientesDetalhesComponent implements OnInit {
                   'MA','MT','MS','MG','PA','PB','PR','PE','PI',
                   'RJ','RN','RS','RO','RR','SC','SP','SE','TO']
   formCliente: FormGroup;
+  arquivoImagem: File;
+  urlImagem: string = '';
 
   constructor(private route:ActivatedRoute, private clientesService: ClientesService, private fb: FormBuilder, private router: Router) { }
 
@@ -22,10 +25,10 @@ export class ClientesDetalhesComponent implements OnInit {
       id:[''],
       nome:['',[Validators.required]],
       dataNasc:['',[Validators.required]],
-      telefoneFixo:['',[Validators.required]],
+      telefoneFixo:[''],
       telefoneCelular:['',[Validators.required]],
       email:['',[Validators.required]],
-      enderecoImagem:['',[Validators.required]],
+      enderecoImagem:[''],
       rg:['',[Validators.required]],
       cpf:['',[Validators.required]],
       endereco:['',[Validators.required]],
@@ -43,6 +46,27 @@ export class ClientesDetalhesComponent implements OnInit {
     });
   }
 
+  ulpoadImagem(arquivo: File){
+    this.arquivoImagem = arquivo;
+    const leitorArquivo = new FileReader();
+    leitorArquivo.onload = (event: any) => {
+      this.cliente.enderecoImagem = this.urlImagem;
+      event.target.result = this.urlImagem
+    }
+
+    leitorArquivo.readAsDataURL(arquivo);
+  }
+
+  setPhotoValue(dados: any){
+    if(dados == ''){
+      dados = environment.semFoto;
+      return dados
+    }
+    else{
+      return dados;
+    }
+  }
+
   atualizarDados(){
     if(this.formCliente.valid){
       const dados = this.formCliente.getRawValue();
@@ -52,7 +76,8 @@ export class ClientesDetalhesComponent implements OnInit {
       });
     }
     else{
-      alert('Existem Dados Invalidos')
+      this.formCliente.markAllAsTouched();
+      alert('Existem Dados Invalidos');
     }
   }
 }
