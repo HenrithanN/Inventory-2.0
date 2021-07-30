@@ -1,0 +1,28 @@
+<h1 class="text-center mt-5">Listagem de Clientes</h1>
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <label for="pesquisa" class="mb-2">Pesquisa por Nome:</label>
+    <input id="pesquisa" type="text" class="form-control" placeholder="Pesquisa por nome" aria-label="Pesquisa por Nome" [(ngModel)]="buscaClientes">
+  </div>
+  <div class="col-md-2 mt-4">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="blue" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+    </svg>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="card m-3 p-2 col-md-auto" style="max-width: 18rem;"  *ngFor="let cliente of clientes | search:buscaClientes">
+      <img src="{{ cliente.enderecoImagem }}" class="card-img-top" alt="Foto do cliente">
+      <div class="card-body">
+        <h5 class="card-title">Nome: {{ cliente.nome }}</h5>
+        <hr>
+        <p class="card-text"> Email: {{ cliente.email }}</p>
+        <hr>
+        <a [routerLink]="['/clientes',cliente.id]" class="btn btn-primary">Detalhes</a>
+        <a class="btn btn-danger ms-3" (click)="excluirCliente(cliente)">Excluir Cliente</a>
+      </div>
+    </div>
+  </div>
+</div>
